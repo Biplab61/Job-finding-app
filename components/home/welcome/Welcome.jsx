@@ -20,10 +20,10 @@ const Welcome = (props) => {
   }
 
   return (
-    <View>
+    <>
 
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Biplab,</Text>
+        <Text style={styles.userName}>Hello {props.username},</Text>
         <Text style={styles.welcomeMessage}>Find your perfect Job</Text>
       </View>
 
@@ -65,7 +65,7 @@ const Welcome = (props) => {
       </View>
 
 
-    </View>
+    </>
   )
 }
 

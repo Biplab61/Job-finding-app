@@ -1,67 +1,67 @@
-import { useState } from "react";
-import { View, ScrollView, SafeAreaView, ActivityIndicator , Text} from "react-native";
-import { Stack, useRouter } from "expo-router";
-import { COLORS, icons, images, SIZES } from '../constants'
-import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components'
-import useFetch from '../hook/useFetch'
+import { useState, useEffect } from "react";
+import { SafeAreaView, View, ImageBackground, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter, Stack } from "expo-router";
+import { COLORS } from '../constants'
+import { AuthWelcome } from '../components'
+import { images } from '../constants'
+
 
 
 const Home = () => {
 
     const router = useRouter();
+    const [loginDetails, setLoginDetails] = useState(null);
+    const [loadingSrc, setLoadingSrc] = useState(true);
 
-    const { data, isLoading, error } = useFetch('search', {
-        query: 'developer jobs in kolkata',
-        num_pages: '3'
-    });
+    const retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('loginDetails');
+            if (value !== null) {
+                setLoginDetails(value);
+            }
+        } catch (error) {
+            setLoginDetails(null);
+        }
+    };
+    useEffect(() => {
+        setTimeout(() => {
+            setLoadingSrc(false);
+            }, 3000);
+        retrieveData();
+    }, []);
 
-    const [search, setSearch] = useState("");
+
+
+
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
-            <Stack.Screen
-                options={{
-                    headerStyle: { backgroundColor: COLORS.lightWhite },
-                    headerShadowVisible: false,
-                    headerLeft: () => (
-                        <ScreenHeaderBtn iconUrl={icons.menu} />
-                    ),
-                    headerRight: () => (
-                        <ScreenHeaderBtn iconUrl={images.profile} />
-                    ),
-                    headerTitle: ""
-                }}
-            />
-
-            <ScrollView showsHorizontalScrollIndicator={false}>
-                <View
-                    style={{
-                        flex: 1,
-                        padding: SIZES.medium
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite, paddingVertical: 35, paddingHorizontal: 10 }}>
+            {loadingSrc ? <>
+                <Stack.Screen
+                    options={{
+                        headerShadowVisible: false,
+                        headerShown: false,
+                        headerTitle: "",
                     }}
-                >
-                    <Welcome searchIcon={icons.search}
-                        search={search}
-                        setSearch={setSearch}
-                        handleClick={()=>{
-                            if(search){
-                                router.push(`search/${search}`)
-                            }
-                        }}
+                />
+                <View style={{ display: "flex", justifyContent: "center", top: '40%' }}>
+                    <View style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: -20 }}>
+                        <Image source={images.chat} style={{ height: 50, width: 50 }} />
+                    </View>
+                    <ImageBackground
+                        style={{ height: 90 }}
+                        resizeMode='contain'
+                        source={images.loading}
                     />
-
-                    {isLoading ? (
-                        <ActivityIndicator size="large" colors={COLORS.primary} style={{margin: 33, textAlign: "center"}}/>
-                    ) : error ? (<Text style={{margin: 33, textAlign: "center"}}>Sorry an Error Occure.</Text>)
-                        : (<>
-                            <Popularjobs data={data.splice(0,10)} />
-                            <Nearbyjobs data={data.splice(11,40)} />
-                        </>)}
-
                 </View>
-            </ScrollView>
+            </> :
+
+                (loginDetails !== null ? router.push('/job-home') : <AuthWelcome />)
+            }
 
         </SafeAreaView>
     );
 }
+
 export default Home;

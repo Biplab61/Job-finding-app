@@ -4,7 +4,7 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "my-app",
-    "slug": "my-app"
+    "name": "Job finder",
+    "slug": "Learn with AI & Discover your Dream Job"
   }
 }

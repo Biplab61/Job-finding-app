@@ -12,6 +12,10 @@ import { default as JobAbout } from "./jobdetails/about/About";
 import { default as JobFooter } from "./jobdetails/footer/Footer";
 import Specifics from "./jobdetails/specifics/Specifics";
 
+// Authontication Screen
+import {default as AuthWelcome} from "./authentication/Welcome";
+
+
 // common
 import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
 
@@ -25,5 +29,6 @@ export {
   JobAbout,
   JobFooter,
   Specifics,
-  NearbyJobCard
+  NearbyJobCard,
+  AuthWelcome,
 };
