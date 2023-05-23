@@ -4,7 +4,16 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "Job finder",
-    "slug": "Learn with AI & Discover your Dream Job"
+    "name": "Job Verse",
+    "slug": "job-verse",
+    "extra": {
+      "eas": {
+        "projectId": "9e4241f0-b2e8-4d46-b019-36e5b0ecaada"
+      }
+    },
+    "owner": "biplab61",
+    "android": {
+      "package": "com.biplab61.jobverse"
+    }
   }
 }
