@@ -28,7 +28,7 @@ const Login = () => {
 
   const submitdata = async () => {
     setRegistering(true);
-
+    
     await axios.post(`${AuthAPI}/auth/login`, userDetails, {
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ const Login = () => {
               }}
             />
           </View>
-          <View>
+          {/* <View>
             <Text
               style={{
                 color: "#1CA1DA",
@@ -125,7 +125,7 @@ const Login = () => {
             >
               Forgot your Password..?
             </Text>
-          </View>
+          </View> */}
 
           {
             registering ? <ActivityIndicator size='large' color={COLORS.primary} /> :
