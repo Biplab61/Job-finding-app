@@ -6,6 +6,7 @@
     },
     "name": "Job Verse",
     "slug": "job-verse",
+    "icon": "./assets/images/bot.png",
     "extra": {
       "eas": {
         "projectId": "9e4241f0-b2e8-4d46-b019-36e5b0ecaada"

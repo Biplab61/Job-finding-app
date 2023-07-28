@@ -14,7 +14,7 @@ const useFetch = (endPoint, query) => {
         '0ef2e5d623msh13c2553766e1f88p117f31jsnc854f565c300',    // rohanpc
     ]
 
-    const [apiKey, setApiKey] = useState(api_key[3]);
+    const [apiKey, setApiKey] = useState(api_key[2]);
     // const [count, setCount] = useState(3);
 
     const options = {
